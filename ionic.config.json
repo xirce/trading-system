@@ -1,0 +1,7 @@
+{
+  "name": "trading-system",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
