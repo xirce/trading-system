@@ -6,8 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {ProfileModule} from "./profile/profile.module";
-import {HeaderModule} from "./header/header.module";
+import {ProfileRoutingModule} from "./pages/profile/profile-routing.module";
+import {HeaderModule} from "./custom-modules/header/header.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +15,7 @@ import {HeaderModule} from "./header/header.module";
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        ProfileModule,
+        ProfileRoutingModule,
         HeaderModule
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

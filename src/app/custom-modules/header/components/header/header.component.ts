@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {MenuController} from "@ionic/angular";
 
 @Component({
@@ -6,6 +6,8 @@ import {MenuController} from "@ionic/angular";
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
+    @Input()
+    public title: string;
     constructor(
         private _menuController: MenuController
     ) {}
