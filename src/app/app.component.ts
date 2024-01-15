@@ -9,7 +9,7 @@ export class AppComponent {
     public links = [
         { title: 'Профиль', url: '/profile', icon: 'person-outline' },
         { title: 'Инвентарь', url: '/inventory', icon: 'cash-outline' },
-        { title: 'История', url: '/history', icon: 'document-text-outline' },
+        { title: 'Покупка/продажа', url: '/buy-and-sale', icon: 'document-text-outline' },
         { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
     ];
 }

@@ -1,17 +1,17 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import {HistoryPage} from "./pages/history/history.page";
+import {BuyAndSalePage} from "./pages/buy-and-sale/buy-and-sale.page";
 import {HeaderModule} from "../../custom-modules/header/header.module";
 
 const components = [
-    HistoryPage
+    BuyAndSalePage
 ];
 
 const routes: Routes = [
     {
         path: '',
-        component: HistoryPage
+        component: BuyAndSalePage
     }
 ];
 
@@ -27,6 +27,6 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class HistoryRoutingModule {
+export class BuyAndSaleRoutingModule {
 
 }
