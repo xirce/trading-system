@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {AuthRequestService} from "./custom-modules/auth/services/auth-request.service";
 
 @Component({
@@ -14,9 +14,9 @@ export class AppComponent {
         { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
     ];
 
-    constructor(
-        private _authService: AuthRequestService
-    ) {
+    private _authService: AuthRequestService = inject(AuthRequestService);
+
+    constructor() {
         this._authService.getAuthStatus()
             .subscribe();
     }

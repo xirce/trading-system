@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {inject, Injectable} from "@angular/core";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {catchError, EMPTY, map, Observable, switchMap, tap} from "rxjs";
 import {environment} from "../../../../environments/environment";
@@ -12,11 +12,7 @@ export class AuthRequestService {
         return this._isAuthorized;
     }
     private _isAuthorized: boolean = false;
-
-    constructor(
-        private _httpClient: HttpClient
-    ) {
-    }
+    private _httpClient: HttpClient = inject(HttpClient);
 
     public getAuthStatus(): Observable<boolean> {
         return this._httpClient.get<HttpResponse<IAuthUserResponseModel>>(environment.apiUrl + 'auth/user', {
