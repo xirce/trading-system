@@ -1,3 +1,9 @@
-<ion-button (click)="authorize()">
-    Войти
-</ion-button>
+<div class="auth__container">
+    <ion-input
+        [(ngModel)]="keyControlValue"
+        label="Введите api ключ"
+        placeholder="api-key"
+        fill="outline"
+        label-placement="floating"></ion-input>
+    <ion-button (click)="authorize()">Войти</ion-button>
+</div>

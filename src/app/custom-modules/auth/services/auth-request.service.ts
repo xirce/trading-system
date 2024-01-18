@@ -30,8 +30,9 @@ export class AuthRequestService {
             );
     }
     
-    public authorize(): void {
-        //return this._httpClient.get<HttpResponse<void>>(environment.apiUrl + 'auth');
-        window.location.href = 'http://localhost:5262/auth?redirectUri=http://localhost:8100/profile';
+    public authorize(key: string): Observable<HttpResponse<void>> {
+        return this._httpClient.post<HttpResponse<void>>(environment.apiUrl + 'auth', {
+            key
+        });
     }
 }
