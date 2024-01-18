@@ -1,7 +1,7 @@
 import {IInventoryItemResponseModel} from "./inventory-item.response-model";
 
 export interface ISearchItemsResponseModel {
-    items: IInventoryItemResponseModel[],
+    items: IInventoryItemResponseModel[];
     pagination: {
         page: number;
         perPage: number;
