@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {inject} from "@angular/core";
-import {map, Observable} from "rxjs";
+import {map, Observable, of} from "rxjs";
 import {environment} from "../../../../../environments/environment";
 import {IInventoryResponseModel} from "../response-models/inventory.response-model";
 import {ISearchItemsResponseModel} from "../response-models/search-items.response-model";
@@ -15,15 +15,130 @@ export class InventoryRequestService {
      * @return поток от массива моделей предметов
      * */
     public getInventory(): Observable<InventoryItemModel[]> {
-        return this._httpClient.get<IInventoryResponseModel>(environment.apiUrl + '/items/inventory')
-            .pipe(
-                map((res: IInventoryResponseModel) => res.items.map((item: IInventoryItemResponseModel) => new InventoryItemModel(item)))
-            );
+        // return this._httpClient.get<IInventoryResponseModel>(environment.apiUrl + 'items/inventory')
+        //     .pipe(
+        //         map((res: IInventoryResponseModel) => res.items.map((item: IInventoryItemResponseModel) => new InventoryItemModel(item)))
+        //     );
+
+        return of([
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+            {
+                name: 'предмет 1',
+                price: 12.5,
+                color: '',
+                assetId: '',
+                hashName: '',
+                iconUrl: 'https://img.freepik.com/premium-vector/pink-light-square-frame-pink-light-square-pink-light-square-banner_1189-2997.jpg'
+            },
+        ])
     }
 
     /** найти предметы */
     public searchItem(query: string, page: number, perPage: number): Observable<ISearchItemsResponseModel> {
-        return this._httpClient.get<ISearchItemsResponseModel>(environment.apiUrl + '/items/search', {
+        return this._httpClient.get<ISearchItemsResponseModel>(environment.apiUrl + 'items/search', {
             params: {
                 query,
                 page,

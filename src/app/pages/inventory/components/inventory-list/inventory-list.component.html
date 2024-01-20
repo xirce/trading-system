@@ -1,3 +1,5 @@
-<ion-list>
-    <inventory-item></inventory-item>
-</ion-list>
+<div class="inventory-list__container">
+    <ng-container *ngFor="let item of listItems$ | async">
+        <inventory-item [model]="item"></inventory-item>
+    </ng-container>
+</div>

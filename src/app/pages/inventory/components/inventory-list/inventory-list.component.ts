@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 @Component({
     selector: 'inventory-list',
     templateUrl: './inventory-list.component.html',
+    styleUrls: ['./styles/inventory-list.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryListComponent implements OnInit {
