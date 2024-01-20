@@ -14,21 +14,13 @@ export class AuthRequestService {
     private _isAuthorized: boolean = false;
     private _httpClient: HttpClient = inject(HttpClient);
 
-    public getAuthStatus(): Observable<boolean> {
-        return this._httpClient.get<HttpResponse<IAuthUserResponseModel>>(environment.apiUrl + 'auth/user', {
-            withCredentials: true
-        })
+    /** Авторизация по ключу */
+    public authorize(): Observable<HttpResponse<void>> {
+        return this._httpClient.get<HttpResponse<void>>(environment.apiUrl + 'auth/user')
             .pipe(
                 tap((res) => {
                     this._isAuthorized = res.status >= 200 && res.status < 300;
-                }),
-                map(() => this._isAuthorized)
+                })
             );
-    }
-    
-    public authorize(key: string): Observable<HttpResponse<void>> {
-        return this._httpClient.post<HttpResponse<void>>(environment.apiUrl + 'auth', {
-            key
-        });
     }
 }

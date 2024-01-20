@@ -13,11 +13,4 @@ export class AppComponent {
         { title: 'Покупка/продажа', url: '/buy-and-sale', icon: 'cash-outline' },
         { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
     ];
-
-    private _authService: AuthRequestService = inject(AuthRequestService);
-
-    constructor() {
-        this._authService.getAuthStatus()
-            .subscribe();
-    }
 }
