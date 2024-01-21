@@ -23,6 +23,7 @@ export class AuthComponent {
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
+                localStorage.setItem('marketKey', this.keyControlValue);
                 this._router.navigate(['/profile']);
             })
     }

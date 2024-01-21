@@ -1,7 +1,9 @@
 <div class="inventory-list__container">
-    <ng-container *ngIf="listItems$ | async as listItems; else emptyList">
-        <ng-container *ngFor="let item of listItems">
-            <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
+    <ng-container *ngIf="listItems$ | async as listItems; else loading">
+        <ng-container *ngIf="listItems.length; else emptyList">
+            <ng-container *ngFor="let item of listItems">
+                <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
+            </ng-container>
         </ng-container>
     </ng-container>
     <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
@@ -12,6 +14,10 @@
         </ng-template>
     </ion-modal>
 </div>
+
+<ng-template #loading>
+    <ion-spinner name="crescent"></ion-spinner>
+</ng-template>
 
 <ng-template #emptyList>
     Нет элементов в инвентаре

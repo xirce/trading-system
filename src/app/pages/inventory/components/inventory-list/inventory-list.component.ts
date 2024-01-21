@@ -15,9 +15,9 @@ export class InventoryListComponent implements OnInit {
     public get isModalOpen(): boolean {
         return this._isModalOpen;
     };
-    public listItems$: Observable<InventoryItemModel[]>;
+    public listItems$: Observable<InventoryItemModel[] | null>;
 
-    private _listItems$: BehaviorSubject<InventoryItemModel[]> = new BehaviorSubject<InventoryItemModel[]>([]);
+    private _listItems$: BehaviorSubject<InventoryItemModel[] | null> = new BehaviorSubject<InventoryItemModel[] | null>(null);
     private _currentItem$: BehaviorSubject<InventoryItemModel> = inject(CURRENT_INVENTORY_ITEM);
     private _destroy$: DestroyRef = inject(DestroyRef);
     private _inventoryRequestService: InventoryRequestService = inject(InventoryRequestService);
