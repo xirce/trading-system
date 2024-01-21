@@ -1,26 +1,39 @@
 import {inject, Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {catchError, EMPTY, map, Observable, switchMap, tap} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {IAuthUserResponseModel} from "../data/models/response-models/auth-user.response-model";
+import {USER_INFO_TOKEN} from "../tokens/user-info.token";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthRequestService {
     public get isAuthorized(): boolean {
-        return this._isAuthorized;
+        return this._isAuthorized$.getValue();
     }
-    private _isAuthorized: boolean = false;
+
+    public isAuthorized$: Observable<boolean>;
+    private _isAuthorized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private _httpClient: HttpClient = inject(HttpClient);
+    private _userInfo$: BehaviorSubject<IAuthUserResponseModel> = inject(USER_INFO_TOKEN);
+
+    constructor() {
+        this.isAuthorized$ = this._isAuthorized$.asObservable();
+    }
 
     /** Авторизация по ключу */
-    public authorize(): Observable<HttpResponse<void>> {
-        return this._httpClient.get<HttpResponse<void>>(environment.apiUrl + 'auth/user')
+    public authorize(): Observable<boolean> {
+        return this._httpClient.get<IAuthUserResponseModel>(environment.apiUrl + 'auth/user')
             .pipe(
-                tap((res) => {
-                    this._isAuthorized = res.status >= 200 && res.status < 300;
-                })
+                tap((res: IAuthUserResponseModel) => {
+                    const isAuthorized = !!res.id;
+                    if (isAuthorized) {
+                        this._isAuthorized$.next(true);
+                        this._userInfo$.next(res);
+                    }
+                }),
+                map(() => this._isAuthorized$.getValue())
             );
     }
 }

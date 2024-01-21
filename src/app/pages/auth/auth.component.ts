@@ -12,12 +12,12 @@ import {Router} from "@angular/router";
 export class AuthComponent {
     public keyControlValue: string;
     private _authService: AuthRequestService = inject(AuthRequestService);
-    private _marketKey: BehaviorSubject<string> = inject(MARKET_KEY_TOKEN);
+    private _marketKey$: BehaviorSubject<string> = inject(MARKET_KEY_TOKEN);
     private _router: Router = inject(Router);
     private _destroyRef = inject(DestroyRef);
 
     public authorize(): void {
-        this._marketKey.next(this.keyControlValue);
+        this._marketKey$.next(this.keyControlValue);
         this._authService.authorize()
             .pipe(
                 takeUntilDestroyed(this._destroyRef)

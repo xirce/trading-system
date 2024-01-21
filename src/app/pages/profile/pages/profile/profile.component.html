@@ -1,7 +1,10 @@
 <app-header [title]="'Профиль'"></app-header>
-<ion-content>
+<ng-container *ngIf="userInfo$ | async as user">
+    <ion-content>
+        <ion-label>{{user.balance}}</ion-label>
         <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img alt="Silhouette of a person's head" [src]="user.avatarUrl" />
         </ion-avatar>
-        <ion-label>Никнейм</ion-label>
+        <ion-label>{{user.name}}</ion-label>
 </ion-content>
+</ng-container>

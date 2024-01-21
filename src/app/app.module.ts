@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MARKET_KEY_TOKEN} from "./custom-modules/auth/tokens/market-key.token";
 import {BehaviorSubject} from "rxjs";
 import {AuthInterceptor} from "./custom-modules/auth/interceptors/market-key-header.interceptor";
+import {USER_INFO_TOKEN} from "./custom-modules/auth/tokens/user-info.token";
 
 @NgModule({
     declarations: [
@@ -43,6 +44,10 @@ import {AuthInterceptor} from "./custom-modules/auth/interceptors/market-key-hea
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
+        },
+        {
+            provide: USER_INFO_TOKEN,
+            useValue: new BehaviorSubject(null)
         }
     ],
     bootstrap: [AppComponent],
