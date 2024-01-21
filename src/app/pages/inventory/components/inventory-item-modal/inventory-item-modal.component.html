@@ -1,0 +1,13 @@
+<ng-container *ngIf="currentItem$ | async as model">
+    <ion-card class="inventory-item__card">
+        <img class="inventory-item__icon" alt="card image" [src]="model.iconUrl" />
+        <ion-card-header>
+            <ion-card-title class="inventory-item__title">
+                {{model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name}}
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{model.price}}
+        </ion-card-content>
+    </ion-card>
+</ng-container>

@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, ViewChild} from "@angular/core";
 import {InventoryRequestService} from "../../data/services/inventory-request.service";
 import {InventoryItemModel} from "../../data/models/inventory-item.model";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import {CURRENT_INVENTORY_ITEM} from "../../tokens/current-inventory-item.token";
 
 @Component({
     selector: 'inventory-list',
@@ -10,16 +11,24 @@ import {Observable} from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryListComponent implements OnInit {
-    public isModalOpen: boolean;
+    public get isModalOpen(): boolean {
+        return this._isModalOpen;
+    };
     public listItems$: Observable<InventoryItemModel[]>;
     private _inventoryRequestService: InventoryRequestService = inject(InventoryRequestService);
-    private _destroy$: DestroyRef = inject(DestroyRef);
+    private _currentItem$: BehaviorSubject<InventoryItemModel> = inject(CURRENT_INVENTORY_ITEM);
+    private _isModalOpen: boolean = false;
 
     public ngOnInit(): void {
         this.listItems$ = this._inventoryRequestService.getInventory();
     }
 
-    public setOpen(isOpen: boolean) {
-        this.isModalOpen = isOpen;
+    public setCurrentItem(item: InventoryItemModel) {
+        this._currentItem$.next(item);
+        this._isModalOpen = true;
+    }
+
+    public closeModal(): void {
+        this._isModalOpen = false;
     }
 }

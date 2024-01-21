@@ -7,11 +7,15 @@ import {InventoryListComponent} from "./components/inventory-list/inventory-list
 import {InventoryItemComponent} from "./components/inventory-item/inventory-item.component";
 import {IonicModule} from "@ionic/angular";
 import {InventoryRequestService} from "./data/services/inventory-request.service";
+import {InventoryItemModalComponent} from "./components/inventory-item-modal/inventory-item-modal.component";
+import {CURRENT_INVENTORY_ITEM} from "./tokens/current-inventory-item.token";
+import {BehaviorSubject} from "rxjs";
 
 const components = [
     InventoryPage,
     InventoryListComponent,
-    InventoryItemComponent
+    InventoryItemComponent,
+    InventoryItemModalComponent
 ];
 
 const routes: Routes = [
@@ -34,7 +38,11 @@ const routes: Routes = [
         RouterModule
     ],
     providers: [
-        InventoryRequestService
+        InventoryRequestService,
+        {
+            provide: CURRENT_INVENTORY_ITEM,
+            useValue: new BehaviorSubject(null)
+        }
     ]
 })
 export class InventoryRoutingModule {

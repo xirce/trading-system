@@ -1,11 +1,11 @@
 <div class="inventory-list__container">
     <ng-container *ngFor="let item of listItems$ | async">
-        <inventory-item (click)="setOpen(true)" [model]="item" ></inventory-item>
+        <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
     </ng-container>
-    <ion-modal [isOpen]="isModalOpen">
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
         <ng-template>
-            <ion-button (click)="setOpen(false)">Close</ion-button>
-            <div>Детали</div>
+            <inventory-item-modal></inventory-item-modal>
+            <ion-button>Close</ion-button>
         </ng-template>
     </ion-modal>
 </div>
