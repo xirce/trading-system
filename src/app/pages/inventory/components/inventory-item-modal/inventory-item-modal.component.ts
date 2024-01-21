@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Ou
 import {InventoryItemModel} from "../../data/models/inventory-item.model";
 import {BehaviorSubject} from "rxjs";
 import {CURRENT_INVENTORY_ITEM} from "../../tokens/current-inventory-item.token";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {SaleItemRequestService} from "../../../../custom-modules/sale-item/data/services/sale-item-request.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
@@ -15,6 +15,10 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 export class InventoryItemModalComponent {
     @Output()
     public closeModal: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    public itemUpForSale: EventEmitter<void> = new EventEmitter<void>();
+
     public currentItem$: BehaviorSubject<InventoryItemModel> = inject(CURRENT_INVENTORY_ITEM);
     public form: FormGroup = new FormGroup<any>({
         minPrice: new FormControl(''),
@@ -39,6 +43,6 @@ export class InventoryItemModalComponent {
             )
             .subscribe(() => {
                 this.closeModal.next();
-            })
+            });
     }
 }

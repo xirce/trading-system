@@ -18,6 +18,10 @@
 
     &__close {
         align-self: end;
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__card {

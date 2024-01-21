@@ -6,7 +6,9 @@
     </ng-container>
     <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
         <ng-template>
-            <inventory-item-modal (closeModal)="closeModal()"></inventory-item-modal>
+            <inventory-item-modal
+                (itemUpForSale)="getNewInventory()"
+                (closeModal)="closeModal()"></inventory-item-modal>
         </ng-template>
     </ion-modal>
 </div>

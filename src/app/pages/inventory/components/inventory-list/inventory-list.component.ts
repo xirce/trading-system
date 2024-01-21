@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, ViewChild} from "@angular/core";
 import {InventoryRequestService} from "../../data/services/inventory-request.service";
 import {InventoryItemModel} from "../../data/models/inventory-item.model";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, take} from "rxjs";
 import {CURRENT_INVENTORY_ITEM} from "../../tokens/current-inventory-item.token";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'inventory-list',
@@ -15,12 +16,28 @@ export class InventoryListComponent implements OnInit {
         return this._isModalOpen;
     };
     public listItems$: Observable<InventoryItemModel[]>;
-    private _inventoryRequestService: InventoryRequestService = inject(InventoryRequestService);
+
+    private _listItems$: BehaviorSubject<InventoryItemModel[]> = new BehaviorSubject<InventoryItemModel[]>([]);
     private _currentItem$: BehaviorSubject<InventoryItemModel> = inject(CURRENT_INVENTORY_ITEM);
+    private _destroy$: DestroyRef = inject(DestroyRef);
+    private _inventoryRequestService: InventoryRequestService = inject(InventoryRequestService);
     private _isModalOpen: boolean = false;
 
     public ngOnInit(): void {
-        this.listItems$ = this._inventoryRequestService.getInventory();
+        this.listItems$ = this._listItems$.asObservable();
+
+        this.getNewInventory();
+    }
+
+    public getNewInventory(): void {
+        this._inventoryRequestService.getInventory()
+            .pipe(
+                take(1),
+                takeUntilDestroyed(this._destroy$)
+            )
+            .subscribe((items: InventoryItemModel[]) => {
+                this._listItems$.next(items);
+            });
     }
 
     public setCurrentItem(item: InventoryItemModel) {

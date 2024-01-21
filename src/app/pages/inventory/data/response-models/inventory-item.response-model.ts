@@ -1,8 +1,9 @@
 export interface IInventoryItemResponseModel {
     name: string;
     hashName: string;
-    price: number;
+    marketPrice: number;
     iconUrl: string;
     color: string;
     assetId: string;
+    currency: string;
 }

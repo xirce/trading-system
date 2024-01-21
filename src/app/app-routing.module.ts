@@ -20,8 +20,8 @@ const routes: Routes = [
         canActivate: [authGuard]
     },
     {
-        path: 'buy-and-sale',
-        loadChildren: () => import('./pages/buy-and-sale/buy-and-sale-routing.module').then(m => m.BuyAndSaleRoutingModule),
+        path: 'trading',
+        loadChildren: () => import('./pages/trading/trading-routing.module').then(m => m.TradingRoutingModule),
         canActivate: [authGuard]
     },
     {

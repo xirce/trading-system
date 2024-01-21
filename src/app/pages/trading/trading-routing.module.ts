@@ -1,17 +1,17 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import {BuyAndSalePage} from "./pages/buy-and-sale/buy-and-sale.page";
 import {HeaderModule} from "../../custom-modules/header/header.module";
+import {TradingPage} from "./pages/trading/trading.page";
 
 const components = [
-    BuyAndSalePage
+    TradingPage
 ];
 
 const routes: Routes = [
     {
         path: '',
-        component: BuyAndSalePage
+        component: TradingPage
     }
 ];
 
@@ -27,6 +27,6 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class BuyAndSaleRoutingModule {
+export class TradingRoutingModule {
 
 }
