@@ -10,6 +10,7 @@ import {InventoryRequestService} from "./data/services/inventory-request.service
 import {InventoryItemModalComponent} from "./components/inventory-item-modal/inventory-item-modal.component";
 import {CURRENT_INVENTORY_ITEM} from "./tokens/current-inventory-item.token";
 import {BehaviorSubject} from "rxjs";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const components = [
     InventoryPage,
@@ -30,7 +31,8 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         HeaderModule,
-        IonicModule
+        IonicModule,
+        ReactiveFormsModule
     ],
     declarations: components,
     exports: [

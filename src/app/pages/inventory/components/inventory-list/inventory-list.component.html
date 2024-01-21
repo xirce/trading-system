@@ -1,11 +1,16 @@
 <div class="inventory-list__container">
-    <ng-container *ngFor="let item of listItems$ | async">
-        <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
+    <ng-container *ngIf="listItems$ | async as listItems; else emptyList">
+        <ng-container *ngFor="let item of listItems">
+            <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
+        </ng-container>
     </ng-container>
     <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
         <ng-template>
-            <inventory-item-modal></inventory-item-modal>
-            <ion-button>Close</ion-button>
+            <inventory-item-modal (closeModal)="closeModal()"></inventory-item-modal>
         </ng-template>
     </ion-modal>
 </div>
+
+<ng-template #emptyList>
+    Нет элементов в инвентаре
+</ng-template>

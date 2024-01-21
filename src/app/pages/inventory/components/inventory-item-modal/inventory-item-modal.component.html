@@ -1,13 +1,47 @@
-<ng-container *ngIf="currentItem$ | async as model">
-    <ion-card class="inventory-item__card">
-        <img class="inventory-item__icon" alt="card image" [src]="model.iconUrl" />
-        <ion-card-header>
-            <ion-card-title class="inventory-item__title">
-                {{model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name}}
-            </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            {{model.price}}
-        </ion-card-content>
-    </ion-card>
-</ng-container>
+<form [formGroup]="form" class="inventory-item-modal__container">
+    <ion-icon
+        class="inventory-item-modal__close"
+        size="large"
+              name="close-outline" slot="end"
+              (click)="closeModal.next()"></ion-icon>
+    <ng-container *ngIf="currentItem$ | async as model">
+        <div class="inventory-item-modal__item-info">
+            <img class="inventory-item__icon" width="250" alt="card image" [src]="model.iconUrl" />
+            <ion-card class="inventory-item-modal__card">
+                <ion-card-header>
+                    <ion-card-title class="inventory-item__title">
+                        {{model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name}}
+                    </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    Текущая цена на маркете: {{model.price}}
+                </ion-card-content>
+            </ion-card>
+        </div>
+        <ion-input
+            formControlName="minPrice"
+            [required]="true"
+            mode="md"
+            label-placement="stacked"
+            fill="outline"
+            placeholder="Введите минимальную цену"
+            label="Минимальная цена"></ion-input>
+        <ion-input
+            formControlName="price"
+            mode="md"
+            [required]="true"
+            label-placement="stacked"
+            fill="outline"
+            placeholder="Введите стартовую цену"
+            label="Цена"></ion-input>
+        <ion-input
+            formControlName="reduceByAmount"
+            mode="md"
+            [required]="true"
+            label-placement="stacked"
+            fill="outline"
+            placeholder="Введите дельту"
+            label="Изменение цены"></ion-input>
+        <ion-button [disabled]="form.invalid" class="inventory-item-modal__sale-btn" (click)="saleItem()">Продать</ion-button>
+    </ng-container>
+</form>
