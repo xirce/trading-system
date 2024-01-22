@@ -8,8 +8,7 @@
                     <ion-label class="profile__nickname">{{ user.name }}</ion-label>
                     <ion-label class="profile__balance">
                         <ion-icon class="profile__icon" name="wallet-outline"></ion-icon>
-                        <div>Баланс: <span>{{ user.balance }}</span> RUB</div>
-
+                        <div>Баланс: <span>{{ user.balance }}</span> ₽</div>
                     </ion-label>
                 </div>
             </div>
@@ -33,6 +32,7 @@
                     label="Пароль steam"
                     placeholder="Введите пароль steam"></ion-input>
                 <ion-input
+                    [type]="'password'"
                     formControlName="sharedSecret"
                     label-placement="stacked"
                     [required]="true"
@@ -41,6 +41,7 @@
                     label="shared_secret"
                     placeholder="Введите shared_secret из market csgo"></ion-input>
                 <ion-input
+                    [type]="'password'"
                     formControlName="identitySecret"
                     label-placement="stacked"
                     [required]="true"

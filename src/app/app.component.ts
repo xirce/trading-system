@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
         { title: 'Покупка/продажа', url: '/trading', icon: 'cash-outline' },
         { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
     ];
-
+    public isSuccessOpen: boolean = false;
+    public isErrorOpen: boolean = false;
     public readonly authService: AuthRequestService = inject(AuthRequestService);
 
     private _marketKey$: BehaviorSubject<string> = inject(MARKET_KEY_TOKEN);

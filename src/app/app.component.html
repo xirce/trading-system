@@ -10,6 +10,16 @@
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
+                <ion-modal [isOpen]="isSuccessOpen">
+                    <ng-template>
+                        isSuccessOpen
+                    </ng-template>
+                </ion-modal>
+                <ion-modal [isOpen]="isErrorOpen">
+                    <ng-template>
+                        isErrorOpen
+                    </ng-template>
+                </ion-modal>
             </ion-content>
         </ion-menu>
         <ion-router-outlet id="main-content"></ion-router-outlet>
