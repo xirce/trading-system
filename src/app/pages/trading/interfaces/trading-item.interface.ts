@@ -6,5 +6,5 @@ export interface ITradingItem {
     countToBuy: number;
     autoSale: boolean;
     buySettings: IBuySettings;
-    saleSettings: ISaleSettings;
+    saleSettings?: ISaleSettings;
 }

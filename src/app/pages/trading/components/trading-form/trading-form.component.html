@@ -61,5 +61,5 @@
             label="Дельта"
             placeholder="Введите дельту"></ion-input>
     </ng-container>
-    <ion-button [disabled]="form.invalid">Создать трейд</ion-button>
+    <ion-button [disabled]="form.invalid" (click)="createTrading()">Создать трейд</ion-button>
 </div>

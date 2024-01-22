@@ -2,8 +2,12 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, injec
 import {FormControl, FormGroup} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TradingRequestService} from "../../data/services/trading-request.service";
-import {catchError, NEVER, take} from "rxjs";
+import {BehaviorSubject, catchError, NEVER, take} from "rxjs";
 import {ITradingItem} from "../../interfaces/trading-item.interface";
+import {
+    SUCCESS_TOKEN_VISIBILITY_TOKEN
+} from "../../../../custom-modules/success-modal/tokens/success-modal-visibility.token";
+import {ERROR_TOKEN_VISIBILITY_TOKEN} from "../../../../custom-modules/error-modal/tokens/error-modal-visibility.token";
 
 @Component({
     selector: 'trading-form',
@@ -19,6 +23,8 @@ export class TradingFormComponent implements OnInit {
         autoSale: new FormControl(false)
     });
 
+    private readonly _successToastVisible$: BehaviorSubject<boolean> = inject(SUCCESS_TOKEN_VISIBILITY_TOKEN);
+    private readonly _errorToastVisible$: BehaviorSubject<boolean> = inject(ERROR_TOKEN_VISIBILITY_TOKEN);
     private _tradingRequestService: TradingRequestService = inject(TradingRequestService);
     private _destroy$: DestroyRef = inject(DestroyRef);
     private _cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
@@ -40,25 +46,34 @@ export class TradingFormComponent implements OnInit {
     public createTrading(): void {
         const data: ITradingItem = {
             hashName: this.form.value.hashName,
-            countToBuy: this.form.value.countToBuy,
+            countToBuy: +this.form.value.countToBuy,
             buySettings: {
-                price: this.form.value.buyPrice,
-                maxPrice: this.form.value.maxBuyPrice
+                price: +this.form.value.buyPrice,
+                maxPrice: +this.form.value.maxBuyPrice
             },
             autoSale: this.form.value.autoSale,
         };
+
+        if (data.autoSale) {
+            data.saleSettings = {
+                price: +this.form.value.salePrice,
+                minPrice: +this.form.value.minSalePrice,
+                reduceByAmount: +this.form.value.reduceByAmount
+            }
+        }
 
         this._tradingRequestService.createTrading(data)
             .pipe(
                 take(1),
                 catchError(() => {
+                    this._errorToastVisible$.next(true);
 
                     return NEVER;
                 }),
                 takeUntilDestroyed(this._destroy$)
             )
             .subscribe(() => {
-
+                this._successToastVisible$.next(true);
             });
     }
 
