@@ -2,7 +2,7 @@
     <ng-container *ngIf="listItems$ | async as listItems; else loading">
         <ng-container *ngIf="listItems.length; else emptyList">
             <ng-container *ngFor="let item of listItems">
-                <inventory-item (click)="setCurrentItem(item)" [model]="item" ></inventory-item>
+                <inventory-item (click)="setCurrentItem(item)" [model]="item"></inventory-item>
             </ng-container>
         </ng-container>
     </ng-container>

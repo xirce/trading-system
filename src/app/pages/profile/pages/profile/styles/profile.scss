@@ -1,0 +1,44 @@
+.profile {
+    &__container {
+        padding: 20px;
+    }
+
+    &__user-info-container {
+        display: flex;
+        gap: 30px;
+        font-size: 20px;
+        @media screen and (max-width: 767px) {
+            flex-direction: column;
+        }
+    }
+
+    &__nickname {
+        font-weight: 700;
+        font-size: 22px;
+        color: #424242;
+    }
+
+    &__user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__balance {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #424242;
+    }
+
+    &__controls {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__icon {
+        font-size: 24px;
+    }
+}

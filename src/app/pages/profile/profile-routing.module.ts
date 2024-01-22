@@ -1,9 +1,11 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {RouterModule, Routes} from "@angular/router";
 import {HeaderModule} from "../../custom-modules/header/header.module";
 import {IonicModule} from "@ionic/angular";
+import {ProfileRequestService} from "./data/services/profile-request.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
     {
@@ -17,7 +19,9 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         HeaderModule,
-        IonicModule
+        IonicModule,
+        NgOptimizedImage,
+        ReactiveFormsModule
     ],
     exports: [
         ProfileComponent,
@@ -25,8 +29,10 @@ const routes: Routes = [
     ],
     declarations: [
         ProfileComponent
+    ],
+    providers: [
+        ProfileRequestService
     ]
 })
 export class ProfileRoutingModule {
-
 }

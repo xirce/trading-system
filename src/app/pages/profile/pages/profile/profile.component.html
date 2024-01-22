@@ -1,10 +1,55 @@
 <app-header [title]="'Профиль'"></app-header>
 <ng-container *ngIf="userInfo$ | async as user">
     <ion-content>
-        <ion-label>{{user.balance}}</ion-label>
-        <ion-avatar>
-            <img alt="Silhouette of a person's head" [src]="user.avatarUrl" />
-        </ion-avatar>
-        <ion-label>{{user.name}}</ion-label>
-</ion-content>
+        <div class="profile__container">
+            <div class="profile__user-info-container">
+                <img alt="avatar" [src]="user.avatarUrl" width="200" height="200"/>
+                <div class="profile__user-info">
+                    <ion-label class="profile__nickname">{{ user.name }}</ion-label>
+                    <ion-label class="profile__balance">
+                        <ion-icon class="profile__icon" name="wallet-outline"></ion-icon>
+                        <div>Баланс: <span>{{ user.balance }}</span> RUB</div>
+
+                    </ion-label>
+                </div>
+            </div>
+            <div [formGroup]="form" class="profile__controls">
+                <ion-input
+                    formControlName="steamLogin"
+                    [type]="'password'"
+                    [required]="true"
+                    label-placement="stacked"
+                    fill="outline"
+                    mode="md"
+                    label="Логин steam"
+                    placeholder="Введите логин steam"></ion-input>
+                <ion-input
+                    formControlName="steamPassword"
+                    [type]="'password'"
+                    [required]="true"
+                    label-placement="stacked"
+                    fill="outline"
+                    mode="md"
+                    label="Пароль steam"
+                    placeholder="Введите пароль steam"></ion-input>
+                <ion-input
+                    formControlName="sharedSecret"
+                    label-placement="stacked"
+                    [required]="true"
+                    fill="outline"
+                    mode="md"
+                    label="shared_secret"
+                    placeholder="Введите shared_secret из market csgo"></ion-input>
+                <ion-input
+                    formControlName="identitySecret"
+                    label-placement="stacked"
+                    [required]="true"
+                    fill="outline"
+                    mode="md"
+                    label="identity_secret"
+                    placeholder="Введите identity_secret из market csgo"></ion-input>
+                <ion-button [disabled]="form.invalid" (click)="saveSettings()">Сохранить</ion-button>
+            </div>
+        </div>
+    </ion-content>
 </ng-container>
