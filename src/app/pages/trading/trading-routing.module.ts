@@ -3,9 +3,14 @@ import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {HeaderModule} from "../../custom-modules/header/header.module";
 import {TradingPage} from "./pages/trading/trading.page";
+import {IonicModule} from "@ionic/angular";
+import {TradingRequestService} from "./data/services/trading-request.service";
+import {TradingFormComponent} from "./components/trading-form/trading-form.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const components = [
-    TradingPage
+    TradingPage,
+    TradingFormComponent
 ];
 
 const routes: Routes = [
@@ -19,12 +24,17 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        HeaderModule
+        HeaderModule,
+        IonicModule,
+        ReactiveFormsModule
     ],
     declarations: components,
     exports: [
         ...components,
         RouterModule
+    ],
+    providers: [
+        TradingRequestService
     ]
 })
 export class TradingRoutingModule {

@@ -1,0 +1,65 @@
+<div class="trading-form__container" [formGroup]="form">
+    <ion-input
+        formControlName="hashName"
+        [required]="true"
+        label-placement="stacked"
+        fill="outline"
+        mode="md"
+        label="Hashname"
+        placeholder="Введите hashname предмета"></ion-input>
+    <ion-input
+        formControlName="countToBuy"
+        [required]="true"
+        label-placement="stacked"
+        fill="outline"
+        mode="md"
+        label="Количество преметов"
+        placeholder="Введите желаемое количество предметов"></ion-input>
+    <ion-input
+        formControlName="buyPrice"
+        [required]="true"
+        label-placement="stacked"
+        fill="outline"
+        mode="md"
+        label="Цена покупки"
+        placeholder="Введите цену покупки"></ion-input>
+    <ion-input
+        formControlName="maxBuyPrice"
+        [required]="true"
+        label-placement="stacked"
+        fill="outline"
+        mode="md"
+        label="Максимальная цена покупки"
+        placeholder="Введите максимальная цену покупки"></ion-input>
+    <ion-checkbox
+        formControlName="autoSale"
+        justify="start"
+        labelPlacement="end">Автопродажа</ion-checkbox>
+    <ng-container *ngIf="form.value.autoSale">
+        <ion-input
+            formControlName="salePrice"
+            [required]="true"
+            label-placement="stacked"
+            fill="outline"
+            mode="md"
+            label="Цена продажи"
+            placeholder="Введите цену продажи"></ion-input>
+        <ion-input
+            formControlName="minSalePrice"
+            [required]="true"
+            label-placement="stacked"
+            fill="outline"
+            mode="md"
+            label="Минимальная цена продажи"
+            placeholder="Введите минимальную цену продажи"></ion-input>
+        <ion-input
+            formControlName="reduceByAmount"
+            [required]="true"
+            label-placement="stacked"
+            fill="outline"
+            mode="md"
+            label="Дельта"
+            placeholder="Введите дельту"></ion-input>
+    </ng-container>
+    <ion-button [disabled]="form.invalid">Создать трейд</ion-button>
+</div>
