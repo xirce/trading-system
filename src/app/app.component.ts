@@ -3,6 +3,8 @@ import {AuthRequestService} from "./custom-modules/auth/services/auth-request.se
 import {Router} from "@angular/router";
 import {BehaviorSubject, catchError, EMPTY} from "rxjs";
 import {MARKET_KEY_TOKEN} from "./custom-modules/auth/tokens/market-key.token";
+import {SUCCESS_TOKEN_VISIBILITY_TOKEN} from "./custom-modules/success-modal/tokens/success-modal-visibility.token";
+import {ERROR_TOKEN_VISIBILITY_TOKEN} from "./custom-modules/error-modal/tokens/error-modal-visibility.token";
 
 @Component({
     selector: 'app-root',
@@ -17,8 +19,8 @@ export class AppComponent implements OnInit {
         { title: 'Покупка/продажа', url: '/trading', icon: 'cash-outline' },
         { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
     ];
-    public isSuccessOpen: boolean = false;
-    public isErrorOpen: boolean = false;
+    public readonly successToastVisible$: BehaviorSubject<boolean> = inject(SUCCESS_TOKEN_VISIBILITY_TOKEN);
+    public readonly errorToastVisible$: BehaviorSubject<boolean> = inject(ERROR_TOKEN_VISIBILITY_TOKEN);
     public readonly authService: AuthRequestService = inject(AuthRequestService);
 
     private _marketKey$: BehaviorSubject<string> = inject(MARKET_KEY_TOKEN);
@@ -46,5 +48,13 @@ export class AppComponent implements OnInit {
                     this._router.navigate(['/profile']);
                 }
             });
+    }
+
+    public successDidDismiss(): void {
+        this.successToastVisible$.next(false);
+    }
+
+    public errorDidDismiss(): void {
+        this.errorToastVisible$.next(false);
     }
 }

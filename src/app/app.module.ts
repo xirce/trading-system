@@ -15,6 +15,8 @@ import {MARKET_KEY_TOKEN} from "./custom-modules/auth/tokens/market-key.token";
 import {BehaviorSubject} from "rxjs";
 import {AuthInterceptor} from "./custom-modules/auth/interceptors/market-key-header.interceptor";
 import {USER_INFO_TOKEN} from "./custom-modules/auth/tokens/user-info.token";
+import {SUCCESS_TOKEN_VISIBILITY_TOKEN} from "./custom-modules/success-modal/tokens/success-modal-visibility.token";
+import {ERROR_TOKEN_VISIBILITY_TOKEN} from "./custom-modules/error-modal/tokens/error-modal-visibility.token";
 
 @NgModule({
     declarations: [
@@ -48,6 +50,14 @@ import {USER_INFO_TOKEN} from "./custom-modules/auth/tokens/user-info.token";
         {
             provide: USER_INFO_TOKEN,
             useValue: new BehaviorSubject(null)
+        },
+        {
+            provide: SUCCESS_TOKEN_VISIBILITY_TOKEN,
+            useValue: new BehaviorSubject(false)
+        },
+        {
+            provide: ERROR_TOKEN_VISIBILITY_TOKEN,
+            useValue: new BehaviorSubject(false)
         }
     ],
     bootstrap: [AppComponent],

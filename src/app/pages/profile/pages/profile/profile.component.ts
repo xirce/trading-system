@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from "@angular/core";
-import {BehaviorSubject, take} from "rxjs";
+import {BehaviorSubject, catchError, NEVER, switchMap, take} from "rxjs";
 import {
     IAuthUserResponseModel
 } from "../../../../custom-modules/auth/data/models/response-models/auth-user.response-model";
@@ -8,6 +8,10 @@ import {ProfileRequestService} from "../../data/services/profile-request.service
 import {FormControl, FormGroup} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {IUserSettings} from "../../data/interfaces/user-settings.interface";
+import {ERROR_TOKEN_VISIBILITY_TOKEN} from "../../../../custom-modules/error-modal/tokens/error-modal-visibility.token";
+import {
+    SUCCESS_TOKEN_VISIBILITY_TOKEN
+} from "../../../../custom-modules/success-modal/tokens/success-modal-visibility.token";
 
 @Component({
     templateUrl: './profile.component.html',
@@ -22,9 +26,10 @@ export class ProfileComponent implements OnInit {
         sharedSecret: new FormControl(''),
         identitySecret: new FormControl('')
     });
-
-    private _profileRequestService: ProfileRequestService = inject(ProfileRequestService);
-    private _destroy$: DestroyRef = inject(DestroyRef);
+    private readonly _successToastVisible$: BehaviorSubject<boolean> = inject(SUCCESS_TOKEN_VISIBILITY_TOKEN);
+    private readonly _errorToastVisible$: BehaviorSubject<boolean> = inject(ERROR_TOKEN_VISIBILITY_TOKEN);
+    private readonly _profileRequestService: ProfileRequestService = inject(ProfileRequestService);
+    private readonly _destroy$: DestroyRef = inject(DestroyRef);
 
     public ngOnInit(): void {
         this._profileRequestService.getUserSettings()
@@ -53,8 +58,15 @@ export class ProfileComponent implements OnInit {
         this._profileRequestService.saveUserSettings(userSettings)
             .pipe(
                 take(1),
+                catchError(() => {
+                    this._errorToastVisible$.next(true);
+
+                    return NEVER;
+                }),
                 takeUntilDestroyed(this._destroy$)
             )
-            .subscribe();
+            .subscribe(() => {
+                this._successToastVisible$.next(true);
+            });
     }
 }
