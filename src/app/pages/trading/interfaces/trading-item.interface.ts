@@ -7,4 +7,5 @@ export interface ITradingItem {
     autoSale: boolean;
     buySettings: IBuySettings;
     saleSettings?: ISaleSettings;
+    iconUrl?: string;
 }

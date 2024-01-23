@@ -2,19 +2,19 @@
     <ion-icon
         class="inventory-item-modal__close"
         size="large"
-              name="close-outline" slot="end"
-              (click)="closeModal.next()"></ion-icon>
+        name="close-outline" slot="end"
+        (click)="closeModal.next()"></ion-icon>
     <ng-container *ngIf="currentItem$ | async as model">
         <div class="inventory-item-modal__item-info">
-            <img class="inventory-item__icon" width="250" alt="card image" [src]="model.iconUrl" />
+            <img class="inventory-item__icon" width="250" alt="card image" [src]="model.iconUrl"/>
             <ion-card class="inventory-item-modal__card">
                 <ion-card-header>
                     <ion-card-title class="inventory-item__title">
-                        {{model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name}}
+                        {{ model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name }}
                     </ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                    Текущая цена на маркете: {{model.marketPrice}} {{model.currency}}
+                    Текущая цена на маркете: {{ model.marketPrice }} {{ model.currency }}
                 </ion-card-content>
             </ion-card>
         </div>
@@ -42,6 +42,7 @@
             fill="outline"
             placeholder="Введите дельту"
             label="Изменение цены"></ion-input>
-        <ion-button [disabled]="form.invalid" class="inventory-item-modal__sale-btn" (click)="saleItem()">Продать</ion-button>
+        <ion-button [disabled]="form.invalid" class="inventory-item-modal__sale-btn" (click)="saleItem()">Продать
+        </ion-button>
     </ng-container>
 </form>

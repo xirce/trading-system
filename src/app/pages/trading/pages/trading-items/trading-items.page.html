@@ -1,0 +1,28 @@
+<app-header [title]="'Предметы в трейде'"></app-header>
+<ion-content>
+    <div class="trading-items__container">
+        <ng-container *ngIf="listItems$ | async as listItems; else loading">
+            <ng-container *ngIf="listItems.length; else emptyList">
+                <ng-container *ngFor="let item of listItems">
+                    <trading-item [model]="item" (click)="openModal(item)"></trading-item>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+        <ion-modal [isOpen]="modalVisible$ | async">
+            <ng-template>
+                <trading-item-modal
+                    [model]="currentItem"
+                    (itemDeleted)="getNewTradingItems()"
+                    (closeModal)="closeModal()"></trading-item-modal>
+            </ng-template>
+        </ion-modal>
+    </div>
+</ion-content>
+
+<ng-template #loading>
+    <ion-spinner name="crescent"></ion-spinner>
+</ng-template>
+
+<ng-template #emptyList>
+    Нет элементов в инвентаре
+</ng-template>

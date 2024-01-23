@@ -8,6 +8,7 @@ import {
     SUCCESS_TOKEN_VISIBILITY_TOKEN
 } from "../../../../custom-modules/success-modal/tokens/success-modal-visibility.token";
 import {ERROR_TOKEN_VISIBILITY_TOKEN} from "../../../../custom-modules/error-modal/tokens/error-modal-visibility.token";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'trading-form',
@@ -17,9 +18,9 @@ import {ERROR_TOKEN_VISIBILITY_TOKEN} from "../../../../custom-modules/error-mod
 export class TradingFormComponent implements OnInit {
     public form: FormGroup = new FormGroup<any>({
         hashName: new FormControl(''),
-        countToBuy: new FormControl(0),
-        buyPrice: new FormControl(0),
-        maxBuyPrice: new FormControl(0),
+        countToBuy: new FormControl(null),
+        buyPrice: new FormControl(null),
+        maxBuyPrice: new FormControl(null),
         autoSale: new FormControl(false)
     });
 
@@ -28,6 +29,7 @@ export class TradingFormComponent implements OnInit {
     private _tradingRequestService: TradingRequestService = inject(TradingRequestService);
     private _destroy$: DestroyRef = inject(DestroyRef);
     private _cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+    private _router: Router = inject(Router);
 
     public ngOnInit(): void {
         this.form.controls['autoSale'].valueChanges
@@ -74,6 +76,7 @@ export class TradingFormComponent implements OnInit {
             )
             .subscribe(() => {
                 this._successToastVisible$.next(true);
+                this._router.navigate(['/trading/items']);
             });
     }
 

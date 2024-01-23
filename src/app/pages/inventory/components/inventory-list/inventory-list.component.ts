@@ -12,20 +12,21 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryListComponent implements OnInit {
-    public get isModalOpen(): boolean {
-        return this._isModalOpen;
-    };
     public listItems$: Observable<InventoryItemModel[] | null>;
+    public modalVisible$: Observable<boolean>;
 
+    private _modalVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private _listItems$: BehaviorSubject<InventoryItemModel[] | null> = new BehaviorSubject<InventoryItemModel[] | null>(null);
     private _currentItem$: BehaviorSubject<InventoryItemModel> = inject(CURRENT_INVENTORY_ITEM);
     private _destroy$: DestroyRef = inject(DestroyRef);
     private _inventoryRequestService: InventoryRequestService = inject(InventoryRequestService);
-    private _isModalOpen: boolean = false;
+
+    constructor() {
+        this.listItems$ = this._listItems$.asObservable();
+        this.modalVisible$ = this._modalVisible$.asObservable();
+    }
 
     public ngOnInit(): void {
-        this.listItems$ = this._listItems$.asObservable();
-
         this.getNewInventory();
     }
 
@@ -42,10 +43,10 @@ export class InventoryListComponent implements OnInit {
 
     public setCurrentItem(item: InventoryItemModel) {
         this._currentItem$.next(item);
-        this._isModalOpen = true;
+        this._modalVisible$.next(true);
     }
 
     public closeModal(): void {
-        this._isModalOpen = false;
+        this._modalVisible$.next(false);
     }
 }

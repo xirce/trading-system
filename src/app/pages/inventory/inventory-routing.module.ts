@@ -11,18 +11,29 @@ import {InventoryItemModalComponent} from "./components/inventory-item-modal/inv
 import {CURRENT_INVENTORY_ITEM} from "./tokens/current-inventory-item.token";
 import {BehaviorSubject} from "rxjs";
 import {ReactiveFormsModule} from "@angular/forms";
+import {InventoryOnSalePage} from "./pages/inventory-on-sale/inventory-on-sale.page";
 
 const components = [
     InventoryPage,
     InventoryListComponent,
     InventoryItemComponent,
-    InventoryItemModalComponent
+    InventoryItemModalComponent,
+    InventoryOnSalePage
 ];
 
 const routes: Routes = [
     {
         path: '',
+        redirectTo: 'item',
+        pathMatch: 'full'
+    },
+    {
+        path: 'items',
         component: InventoryPage
+    },
+    {
+        path: 'sale',
+        component: InventoryOnSalePage
     }
 ];
 

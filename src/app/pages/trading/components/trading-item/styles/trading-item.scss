@@ -1,0 +1,18 @@
+.trading-item {
+    &__card {
+        max-width: 250px;
+        background-size:cover;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__icon {
+        width: 250px;
+        max-height: 187.5px;
+    }
+
+    &__title {
+        word-break: break-all;
+    }
+}

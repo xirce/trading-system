@@ -15,9 +15,10 @@ import {ERROR_TOKEN_VISIBILITY_TOKEN} from "./custom-modules/error-modal/tokens/
 export class AppComponent implements OnInit {
     public links = [
         { title: 'Профиль', url: '/profile', icon: 'person-outline' },
-        { title: 'Инвентарь', url: '/inventory', icon: 'file-tray-full-outline' },
-        { title: 'Покупка/продажа', url: '/trading', icon: 'cash-outline' },
-        { title: 'Статистика', url: '/statistics', icon: 'trending-up-outline' }
+        { title: 'Инвентарь', url: '/inventory/items', icon: 'file-tray-full-outline' },
+        { title: 'Предметы в продаже', url: '/inventory/sale', icon: 'pricetags-outline' },
+        { title: 'Покупка/продажа', url: '/trading/form', icon: 'cash-outline' },
+        { title: 'Предметы в трейде', url: '/trading/items', icon: 'trending-up-outline' }
     ];
     public readonly successToastVisible$: BehaviorSubject<boolean> = inject(SUCCESS_TOKEN_VISIBILITY_TOKEN);
     public readonly errorToastVisible$: BehaviorSubject<boolean> = inject(ERROR_TOKEN_VISIBILITY_TOKEN);

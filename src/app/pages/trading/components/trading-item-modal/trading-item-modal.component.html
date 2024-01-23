@@ -1,0 +1,22 @@
+<div class="trading-item-modal">
+    <ion-icon
+        class="trading-item-modal__close"
+        size="large"
+        name="close-outline" slot="end"
+        (click)="closeModal.next()"></ion-icon>
+    <ng-container *ngIf="model">
+        <div class="trading-item-modal__item-info">
+            <img class="trading-item__icon" width="250" alt="card image" [src]="model.iconUrl"/>
+            <ion-card class="trading-item-modal__card">
+                <ion-card-header>
+                    <ion-card-title class="trading-item__title">
+                        {{ model.hashName }}
+                    </ion-card-title>
+                </ion-card-header>
+            </ion-card>
+        </div>
+        <ion-button (click)="deleteItem()">
+            Убрать с трейда
+        </ion-button>
+    </ng-container>
+</div>

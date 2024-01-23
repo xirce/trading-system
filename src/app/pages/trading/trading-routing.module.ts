@@ -7,16 +7,31 @@ import {IonicModule} from "@ionic/angular";
 import {TradingRequestService} from "./data/services/trading-request.service";
 import {TradingFormComponent} from "./components/trading-form/trading-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {TradingItemsPage} from "./pages/trading-items/trading-items.page";
+import {TradingItemComponent} from "./components/trading-item/trading-item.component";
+import {TradingItemModalComponent} from "./components/trading-item-modal/trading-item-modal.component";
 
 const components = [
     TradingPage,
-    TradingFormComponent
+    TradingFormComponent,
+    TradingItemsPage,
+    TradingItemComponent,
+    TradingItemModalComponent
 ];
 
 const routes: Routes = [
     {
         path: '',
+        redirectTo: 'form',
+        pathMatch: 'full'
+    },
+    {
+        path: 'form',
         component: TradingPage
+    },
+    {
+        path: 'items',
+        component: TradingItemsPage
     }
 ];
 
