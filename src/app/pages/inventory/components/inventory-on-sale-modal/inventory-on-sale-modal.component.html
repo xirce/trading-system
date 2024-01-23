@@ -1,0 +1,20 @@
+<div class="inventory-on-sale-modal">
+    <ion-icon
+        class="inventory-on-sale-modal__close"
+        size="large"
+        name="close-outline" slot="end"
+        (click)="closeModal.next()"></ion-icon>
+    <ng-container *ngIf="currentItem$ | async as model">
+        <div class="inventory-on-sale-modal__item-info">
+            <img class="inventory-item__icon" width="250" alt="card image" [src]="model.iconUrl"/>
+            <ion-card class="inventory-on-sale-modal__card">
+                <ion-card-header>
+                    <ion-card-title class="inventory-item__title">
+                        {{ model.name.length > 43 ? (model.name | slice:0:6) + '...' : model.name }}
+                    </ion-card-title>
+                </ion-card-header>
+            </ion-card>
+        </div>
+        <ion-button class="inventory-on-sale-modal__delete-btn" (click)="removeItemFromSale()">Убрать с продажи</ion-button>
+    </ng-container>
+</div>

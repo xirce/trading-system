@@ -1,4 +1,4 @@
-<div class="inventory-list">
+<div class="inventory-on-sale-list">
     <ng-container *ngIf="items$ | async as listItems; else loading">
         <ng-container *ngIf="listItems.length; else emptyList">
             <ng-container *ngFor="let item of listItems">
@@ -8,9 +8,9 @@
     </ng-container>
     <ion-modal [isOpen]="modalVisible$ | async" (didDismiss)="closeModal()">
         <ng-template>
-            <inventory-item-modal
-                (itemUpForSale)="getNewInventory()"
-                (closeModal)="closeModal()"></inventory-item-modal>
+            <inventory-on-sale-modal
+                (returnItemToInventory)="getNewInventory()"
+                (closeModal)="closeModal()"></inventory-on-sale-modal>
         </ng-template>
     </ion-modal>
 </div>

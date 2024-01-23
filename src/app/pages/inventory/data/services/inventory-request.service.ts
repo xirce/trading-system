@@ -6,6 +6,9 @@ import {IInventoryResponseModel} from "../response-models/inventory.response-mod
 import {ISearchItemsResponseModel} from "../response-models/search-items.response-model";
 import {InventoryItemModel} from "../models/inventory-item.model";
 import {IInventoryItemResponseModel} from "../response-models/inventory-item.response-model";
+import {IInventoryItemOnSaleResponseModel} from "../response-models/inventory-item-on-sale.response-model";
+import {IInventoryOnSaleResponseModel} from "../response-models/inventory-on-sale.response-model";
+import {InventoryItemOnSaleModel} from "../models/inventory-item-on-sale.model";
 
 export class InventoryRequestService {
     private _httpClient: HttpClient = inject(HttpClient);
@@ -21,14 +24,11 @@ export class InventoryRequestService {
             );
     }
 
-    /** найти предметы */
-    public searchItem(query: string, page: number, perPage: number): Observable<ISearchItemsResponseModel> {
-        return this._httpClient.get<ISearchItemsResponseModel>(environment.apiUrl + 'items/search', {
-            params: {
-                query,
-                page,
-                perPage
-            }
-        });
+
+    public getSaleItems(): Observable<InventoryItemOnSaleModel[]> {
+        return this._httpClient.get<IInventoryOnSaleResponseModel>(environment.apiUrl + 'sale/items')
+            .pipe(
+                map((res: IInventoryOnSaleResponseModel) => res.saleItems.map((item: IInventoryItemOnSaleResponseModel) => new InventoryItemOnSaleModel(item)))
+            );
     }
 }

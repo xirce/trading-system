@@ -3,7 +3,6 @@ export interface IInventoryItemResponseModel {
     hashName: string;
     marketPrice: number;
     iconUrl: string;
-    color: string;
     assetId: string;
-    currency: string;
+    currency?: string;
 }

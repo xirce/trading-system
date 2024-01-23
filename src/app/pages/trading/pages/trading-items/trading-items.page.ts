@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from "@angular/core";
 import {TradingRequestService} from "../../data/services/trading-request.service";
-import {BehaviorSubject, catchError, NEVER, Observable, take} from "rxjs";
+import {BehaviorSubject, catchError, NEVER, Observable, of, take} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {ERROR_TOKEN_VISIBILITY_TOKEN} from "../../../../custom-modules/error-modal/tokens/error-modal-visibility.token";
 import {TradingItemModel} from "../../data/models/trading-item.model";
@@ -41,7 +41,7 @@ export class TradingItemsPage implements OnInit {
                 catchError(() => {
                     this._errorToastVisible$.next(true);
 
-                    return NEVER;
+                    return of([]);
                 }),
                 takeUntilDestroyed(this._destroy$)
             )

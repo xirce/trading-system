@@ -12,13 +12,17 @@ import {CURRENT_INVENTORY_ITEM} from "./tokens/current-inventory-item.token";
 import {BehaviorSubject} from "rxjs";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InventoryOnSalePage} from "./pages/inventory-on-sale/inventory-on-sale.page";
+import {InventoryOnSaleModalComponent} from "./components/inventory-on-sale-modal/inventory-on-sale-modal.component";
+import {InventoryOnSaleListComponent} from "./components/inventory-on-sale-list/inventory-on-sale-list.component";
 
 const components = [
     InventoryPage,
     InventoryListComponent,
     InventoryItemComponent,
     InventoryItemModalComponent,
-    InventoryOnSalePage
+    InventoryOnSalePage,
+    InventoryOnSaleModalComponent,
+    InventoryOnSaleListComponent
 ];
 
 const routes: Routes = [

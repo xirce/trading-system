@@ -13,4 +13,8 @@ export class SaleItemRequestService {
     public saleItem(data: ISaleItemRequestModel): Observable<void> {
         return this._httpClient.post<void>(environment.apiUrl + 'sale', data);
     }
+
+    public deleteSale(assetId: string): Observable<void> {
+        return this._httpClient.delete<void>(environment.apiUrl + `sale/${assetId}`);
+    }
 }
