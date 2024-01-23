@@ -8,8 +8,8 @@
         "start": "ng serve",
         "build": "ng build",
         "npm:install": "npm i",
-        "android:add": "ionic cap add android",
-        "ionic:build": "ionic build && ionic cap sync && ionic cap open android"
+        "add-android": "ionic cap add android",
+        "ionic-build-app": "ionic build && ionic cap sync && ionic cap open android"
     },
     "private": true,
     "dependencies": {
