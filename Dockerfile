@@ -7,4 +7,4 @@ COPY . .
 RUN ionic build
 
 RUN npm install -g http-server
-CMD ["http-server", "/www"]
+CMD ["http-server", "./www"]
