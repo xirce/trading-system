@@ -117,3 +117,12 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+.app {
+  &__title {
+    @media screen and (min-width: 767px){
+      font-size: 28px;
+      font-weight: 700;
+    }
+  }
+}
